@@ -23,20 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const classes_1 = require("./classes");
 const Utility = __importStar(require("./functions"));
+const _ = __importStar(require("lodash"));
 let inventory = Utility.GetAllMovie();
-let favoriteMovies = new classes_1.Favorites();
-inventory.forEach(movie => favoriteMovies.add(movie));
-let firstFave = favoriteMovies.getFirst();
-let docs = [
-    new classes_1.Documentary('Baseball', 1994, 'History'),
-    new classes_1.Documentary('In Pursuit of Flavor', 2022, 'Wine'),
-    new classes_1.Documentary('Gumbo', 2018, 'Food'),
-];
-let favoriteDocs = new classes_1.Favorites();
-docs.forEach(doc => favoriteDocs.add(doc));
-let firstDoc = favoriteDocs.getFirst();
-favoriteDocs.printTitles();
-let originalMovie = favoriteMovies.find('A New Hope');
-console.log(`${originalMovie.title} - ${originalMovie.yearReleased}`);
+inventory.forEach(movie => console.log(_.snakeCase(movie.title)));
