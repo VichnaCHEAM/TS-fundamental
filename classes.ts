@@ -1,6 +1,6 @@
 import { CastMember, FavoriteItem} from "./interfaces";
-
- export class Performer implements CastMember {
+import { logMethodInfo } from "./decorations";
+export class Performer implements CastMember {
   
     name: string = " ";
     email: string = "";
@@ -11,7 +11,7 @@ import { CastMember, FavoriteItem} from "./interfaces";
     }
   }
 
-  abstract class Video {
+abstract class Video {
       public _producer: string = '';
     //private _producer: string = '';
     static medium: string = 'Audio/Visual';
@@ -41,6 +41,7 @@ export class Documentary extends Video {
       super(newTitle, newyear)
     }
 
+    @logMethodInfo
     printItem(): void {
       super.printItem();
       console.log(`Subject: ${this.subject} (${this.year}.)`)
