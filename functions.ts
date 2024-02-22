@@ -82,46 +82,33 @@ export function PrintMovieInfo(movie : Movie){
   //const LogMessage = (message: string) => console.log(message);
   //LogMessage('Enjoy the movie!');
 
-  abstract class Video {
-      public _producer: string = '';
-    //private _producer: string = '';
-    static medium: string = 'Audio/Visual';
 
-    get producer(): string {
-      return this._producer.toUpperCase();
-    }
+export  function getMoviesByDirector (director: string) : Promise<string[]>{
 
-    set producer(newProducer: string){
-      this._producer = newProducer;
-    }
-    constructor( public title: string,public year: number){
-      console.log(`Creating a new video`);
+    let p: Promise<string[]> = new Promise ((resolve, reject) => {
+        setTimeout(() => {
+            let foundMovies: string[] = GetTitles(director);
+            if (foundMovies.length > 0){
+                resolve(foundMovies);
+            }
+            else{
+                reject('No movie is found for that director');
+            }
+        }, 2000);
+    })
 
-    }
+    return p;
+}
 
-    printItem(): void {
-      console.log(`{this.title} was released in ${this.year}.`);
-      console.log(`Medium: ${Video.medium}`);
-    }
+export async function logSearchResults(director: string) {
+    let foundMovies = await getMoviesByDirector(director);
+    console.log(foundMovies);
+}
 
-    abstract printCredits(): void;
-  }
 
-/*Abstract Class 
-let vid: Video = new documentary ('The History of Movies', 2024, 'film history');
-vid.producer = 'Sci-fi Pictures';
-vid.printCredits(); */
+export function Purge<T>(inventory: Array<T>): Array<T> {
+    //implement some fancy business logic
+    //return the purge items
 
-//Class : Expression 
-  let Musical = class extends Video {
-    printCredits(): void{
-      console.log(`Musical credits: ${this.producer}.`);
-    }
-  }
-  let myMusical = new Musical('Grease', 1978);
-  myMusical.producer = 'Sing-song Pictures';
-  myMusical.printCredits();
-
-  class Course extends class { title: string = ''; }{
-    subject: string = '';
+    return inventory.splice(3, inventory.length);
 }

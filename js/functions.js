@@ -1,6 +1,15 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetTitles = exports.PrintMovieInfo = exports.GetAllMovie = void 0;
+exports.Purge = exports.logSearchResults = exports.getMoviesByDirector = exports.GetTitles = exports.PrintMovieInfo = exports.GetAllMovie = void 0;
 function GetAllMovie() {
     return [
         { title: 'A New Hope', director: 'George Lucas', yearReleased: 1977, streaming: true },
@@ -76,46 +85,31 @@ exports.GetTitles = GetTitles;
 //PrintMovieInfo('A New Hope', 1977, 'Carrie', 'Mark');
 //const LogMessage = (message: string) => console.log(message);
 //LogMessage('Enjoy the movie!');
-class Video {
-    get producer() {
-        return this._producer.toUpperCase();
-    }
-    set producer(newProducer) {
-        this._producer = newProducer;
-    }
-    constructor(title, year) {
-        this.title = title;
-        this.year = year;
-        this._producer = '';
-        console.log(`Creating a new video`);
-    }
-    printItem() {
-        console.log(`{this.title} was released in ${this.year}.`);
-        console.log(`Medium: ${Video.medium}`);
-    }
+function getMoviesByDirector(director) {
+    let p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let foundMovies = GetTitles(director);
+            if (foundMovies.length > 0) {
+                resolve(foundMovies);
+            }
+            else {
+                reject('No movie is found for that director');
+            }
+        }, 2000);
+    });
+    return p;
 }
-//private _producer: string = '';
-Video.medium = 'Audio/Visual';
-/*Abstract Class
-let vid: Video = new documentary ('The History of Movies', 2024, 'film history');
-vid.producer = 'Sci-fi Pictures';
-vid.printCredits(); */
-//Class : Expression 
-let Musical = class extends Video {
-    printCredits() {
-        console.log(`Musical credits: ${this.producer}.`);
-    }
-};
-let myMusical = new Musical('Grease', 1978);
-myMusical.producer = 'Sing-song Pictures';
-myMusical.printCredits();
-class Course extends class {
-    constructor() {
-        this.title = '';
-    }
-} {
-    constructor() {
-        super(...arguments);
-        this.subject = '';
-    }
+exports.getMoviesByDirector = getMoviesByDirector;
+function logSearchResults(director) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let foundMovies = yield getMoviesByDirector(director);
+        console.log(foundMovies);
+    });
 }
+exports.logSearchResults = logSearchResults;
+function Purge(inventory) {
+    //implement some fancy business logic
+    //return the purge items
+    return inventory.splice(3, inventory.length);
+}
+exports.Purge = Purge;

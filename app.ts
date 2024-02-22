@@ -2,28 +2,11 @@ import { Movie, Logger, CastMember as Actor } from "./interfaces";
 import { Performer, documentary } from "./classes";
 import * as Utility from "./functions";
 
-function getMoviesByDirector (director: string) : Promise<string[]>{
+let inventory: Array<Movie> = Utility.GetAllMovie();
 
-    let p: Promise<string[]> = new Promise ((resolve, reject) => {
-        setTimeout(() => {
-            let foundMovies: string[] = Utility.GetTitles(director);
-            if (foundMovies.length > 0){
-                resolve(foundMovies);
-            }
-            else{
-                reject('No movie is found for that director');
-            }
-        }, 2000);
-    })
+let purgeMovies: Array<Movie> = Utility.Purge(inventory);
 
-    return p;
-}
+purgeMovies.forEach(movie => console.log(movie.title));
 
-async function logSearchResults(director: string) {
-    let foundMovies = await getMoviesByDirector(director);
-    console.log(foundMovies);
-}
-console.log('Beginning search....');
-logSearchResults('Goerge Lucas')
-    .catch( reason => console.log(reason));
-console.log('Search submitted....');
+let purgedNums: Array<number> = Utility.Purge<number>([1,2,3,4,5 ]);
+console.log(purgedNums);
