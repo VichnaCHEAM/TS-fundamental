@@ -37,5 +37,6 @@ let docs = [
 let favoriteDocs = new classes_1.Favorites();
 docs.forEach(doc => favoriteDocs.add(doc));
 let firstDoc = favoriteDocs.getFirst();
-let faveNums = new classes_1.Favorites();
-[1, 3.13, 42].forEach(num => faveNums.add(num));
+favoriteDocs.printTitles();
+let originalMovie = favoriteMovies.find('A New Hope');
+console.log(`${originalMovie.title} - ${originalMovie.yearReleased}`);

@@ -1,4 +1,4 @@
-import { CastMember } from "./interfaces";
+import { CastMember, FavoriteItem} from "./interfaces";
 
  export class Performer implements CastMember {
   
@@ -65,7 +65,7 @@ export class Course extends class { title: string = ''; }{
 }
 
 
-export class Favorites<T> {
+export class Favorites<T extends FavoriteItem> {
     private _items: Array<T> = new Array<T>;
 
     add(item: T): void {
@@ -76,6 +76,12 @@ export class Favorites<T> {
         return this._items[0];
     }
 
-    
+    find(title: string): T {
+        return this._items.filter(item => item.title ===title)[0];
+    }
+
+    printTitles(): void {
+        this._items.forEach(item => console.log(item.title));
+    }
 
 }
