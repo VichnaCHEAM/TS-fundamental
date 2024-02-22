@@ -36,7 +36,7 @@ import { CastMember } from "./interfaces";
     abstract printCredits(): void;
   }
 
-export class documentary extends Video {
+export class Documentary extends Video {
     constructor(newTitle: string, newyear: number, public subject: string){
       super(newTitle, newyear)
     }
@@ -62,4 +62,20 @@ export let Musical = class extends Video {
 
 export class Course extends class { title: string = ''; }{
     subject: string = '';
+}
+
+
+export class Favorites<T> {
+    private _items: Array<T> = new Array<T>;
+
+    add(item: T): void {
+        this._items.push(item);
+    }
+
+    getFirst(): T {
+        return this._items[0];
+    }
+
+    
+
 }

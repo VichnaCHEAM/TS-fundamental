@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Course = exports.Musical = exports.documentary = exports.Performer = void 0;
+exports.Favorites = exports.Course = exports.Musical = exports.Documentary = exports.Performer = void 0;
 class Performer {
     constructor() {
         this.name = " ";
@@ -32,7 +32,7 @@ class Video {
 }
 //private _producer: string = '';
 Video.medium = 'Audio/Visual';
-class documentary extends Video {
+class Documentary extends Video {
     constructor(newTitle, newyear, subject) {
         super(newTitle, newyear);
         this.subject = subject;
@@ -45,7 +45,7 @@ class documentary extends Video {
         console.log(`Producer: ${this.producer}.`);
     }
 }
-exports.documentary = documentary;
+exports.Documentary = Documentary;
 let Musical = class extends Video {
     printCredits() {
         console.log(`Musical credits: ${this.producer}.`);
@@ -66,3 +66,15 @@ class Course extends class {
     }
 }
 exports.Course = Course;
+class Favorites {
+    constructor() {
+        this._items = new Array;
+    }
+    add(item) {
+        this._items.push(item);
+    }
+    getFirst() {
+        return this._items[0];
+    }
+}
+exports.Favorites = Favorites;

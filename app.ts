@@ -1,12 +1,23 @@
 import { Movie, Logger, CastMember as Actor } from "./interfaces";
-import { Performer, documentary } from "./classes";
+import { Performer, Documentary, Favorites} from "./classes";
 import * as Utility from "./functions";
 
 let inventory: Array<Movie> = Utility.GetAllMovie();
+let favoriteMovies: Favorites<Movie> = new Favorites<Movie>();
+inventory.forEach(movie => favoriteMovies.add(movie));
 
-let purgeMovies: Array<Movie> = Utility.Purge(inventory);
+let firstFave: Movie = favoriteMovies.getFirst();
 
-purgeMovies.forEach(movie => console.log(movie.title));
+let docs: Array<Documentary> = [
+new Documentary( 'Baseball', 1994, 'History'), 
+new Documentary('In Pursuit of Flavor', 2022, 'Wine'),
+new Documentary ('Gumbo', 2018, 'Food'),
+];
 
-let purgedNums: Array<number> = Utility.Purge<number>([1,2,3,4,5 ]);
-console.log(purgedNums);
+let favoriteDocs: Favorites<Documentary> = new Favorites<Documentary>() ;
+docs. forEach(doc => favoriteDocs.add (doc));
+
+let firstDoc: Documentary = favoriteDocs.getFirst();
+
+let faveNums: Favorites<number> = new Favorites<number>();
+[1,3.13, 42].forEach(num => faveNums.add(num));

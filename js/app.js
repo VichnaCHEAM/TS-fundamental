@@ -23,9 +23,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const classes_1 = require("./classes");
 const Utility = __importStar(require("./functions"));
 let inventory = Utility.GetAllMovie();
-let purgeMovies = Utility.Purge(inventory);
-purgeMovies.forEach(movie => console.log(movie.title));
-let purgedNums = Utility.Purge([1, 2, 3, 4, 5]);
-console.log(purgedNums);
+let favoriteMovies = new classes_1.Favorites();
+inventory.forEach(movie => favoriteMovies.add(movie));
+let firstFave = favoriteMovies.getFirst();
+let docs = [
+    new classes_1.Documentary('Baseball', 1994, 'History'),
+    new classes_1.Documentary('In Pursuit of Flavor', 2022, 'Wine'),
+    new classes_1.Documentary('Gumbo', 2018, 'Food'),
+];
+let favoriteDocs = new classes_1.Favorites();
+docs.forEach(doc => favoriteDocs.add(doc));
+let firstDoc = favoriteDocs.getFirst();
+let faveNums = new classes_1.Favorites();
+[1, 3.13, 42].forEach(num => faveNums.add(num));
